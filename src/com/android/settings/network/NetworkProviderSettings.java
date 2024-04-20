@@ -485,6 +485,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     @Override
     public void onAttach(Context context) {
+        Log.d(TAG, "JTS onAttach");
         super.onAttach(context);
     }
 
@@ -911,6 +912,18 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     @Override
     public void onWifiEntriesChanged(@WifiPickerTracker.WifiEntriesChangedReason int reason) {
+        Log.d(TAG, "JTS notifyOnWifiEntriesChanged");
+        // TODO: RESUME-POINT // pending investigation // the normal flow reaches here only after
+        //   onAttach, both when entering activity the first time or via a back press.
+        //   but there are null checks for getActivity() in methods called below like
+        //   updateWifiEntryPreferences()
+        //   so it makes sense to replicate those null checks in methods being called further below
+        //   like changeNextButtonState()
+        //   but that might just "postpone" the issue and the further further methods might face
+        //   the same fate.
+        //   ///
+        //   NEXT: try to find out if there's a route that leads here without onAttach being called
+        //   first. because that would be the root cause.
         updateWifiEntryPreferences();
         if (reason == WifiPickerTracker.WIFI_ENTRIES_CHANGED_REASON_SCAN_RESULTS) {
             setProgressBarVisible(false);
