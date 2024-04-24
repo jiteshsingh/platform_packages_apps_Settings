@@ -491,6 +491,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     @Override
     public void onStart() {
+        Log.d(TAG, "JTS onStart");
         super.onStart();
         if (mIsViewLoading) {
             final long delayMillis = (hasWifiManager() && mWifiManager.isWifiEnabled())
@@ -912,7 +913,7 @@ public class NetworkProviderSettings extends RestrictedSettingsFragment
 
     @Override
     public void onWifiEntriesChanged(@WifiPickerTracker.WifiEntriesChangedReason int reason) {
-        Log.d(TAG, "JTS notifyOnWifiEntriesChanged");
+        Log.d(TAG, "JTS onWifiEntriesChanged");
         // TODO: RESUME-POINT // pending investigation // the normal flow reaches here only after
         //   onAttach, both when entering activity the first time or via a back press.
         //   but there are null checks for getActivity() in methods called below like

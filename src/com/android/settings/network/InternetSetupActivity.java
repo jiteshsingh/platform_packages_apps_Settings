@@ -1,8 +1,10 @@
 package com.android.settings.network;
 
+import android.annotation.CallSuper;
 import android.content.Intent;
 import android.os.Bundle;
 import android.text.TextUtils;
+import android.util.Log;
 import android.widget.TextView;
 
 import androidx.annotation.Nullable;
@@ -25,7 +27,14 @@ public class InternetSetupActivity extends SettingsActivity {
     }
 
     @Override
+    protected void onStart() {
+        Log.d("InternetSetupActivity", "JTS onStart");
+        super.onStart();
+    }
+
+    @Override
     protected void createUiFromIntent(Bundle savedState, Intent intent) {
+        Log.d("InternetSetupActivity", "JTS createUiFromIntent");
         intent.putExtra("extra_prefs_show_button_bar", false);
         super.createUiFromIntent(savedState, intent);
     }
